@@ -1,0 +1,487 @@
+\documentclass[12pt]{scrartcl}
+
+\usepackage[sexy, noasy]{evan}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[inline]{asymptote}
+\usepackage{hyperref}
+\usepackage{xcolor-material}
+\usepackage{mathptmx}
+\usepackage{mdframed}
+\usepackage{tabularx}
+
+
+
+\mdfdefinestyle{mybox}{
+	outerlinewidth = .5,
+	linewidth = 1pt,
+	skipabove = 10pt,
+	roundcorner = 0pt,
+	leftmargin = 40,
+	rightmargin = 40,
+	backgroundcolor = GoogleRed!30,
+	outerlinecolor = blue!100,
+	shadow = true,
+	innertopmargin = 10,
+	splittopskip = \topskip,
+}
+
+\mdfdefinestyle{observebox}{
+	outerlinewidth = 5,
+	linewidth = 1pt,
+	skipabove = 10pt,
+	roundcorner = 0pt,
+	leftmargin = 40,
+	rightmargin = 40,
+	topline = false,
+	bottomline = false,
+	leftline = true,
+	rightline = true,
+	backgroundcolor = GoogleYellow!30,
+	outerlinecolor = red!100,
+	shadow = true,
+	innertopmargin = 10,
+	splittopskip = \topskip,
+}
+
+\mdfdefinestyle{recallbox}{
+	outerlinewidth = .5,
+	linewidth = 1pt,
+	skipabove = 10pt,
+	roundcorner = 0pt,
+	leftmargin = 40,
+	rightmargin = 40,
+	backgroundcolor = magenta!50,
+	outerlinecolor = blue!100,
+	shadow = true,
+	innertopmargin = 10,
+	splittopskip = \topskip,
+}
+
+
+\newcommand{\mytt}[1]{\textcolor{ForestGreen}{\texttt{#1}}}
+\newcommand{\disp}{\displaystyle}
+
+
+\title{MAT 342 Assignment Solution}
+\author{Group 3}
+
+\begin{document}
+\baselineskip24pt
+	\maketitle
+	This is the solution to the group assignment given on MAT 342 (Mathematical Methods II) which is being taken by \mytt{Dr. P.O Arawomo}.
+	\section{Group Member}
+	In this section is the list of the group members in group 3 with their name and matriculation number.
+	%% Sheeesh I'm now ading the table noowww :(
+	
+	\begin{table}[H]
+		\setlength\extrarowheight{2pt}
+		\centering
+		\begin{tabular}{|c|c|}
+			\hline 
+			\textbf{Name} & \textsf{Matric. Number} \\
+			\hline 
+			TOKAN Williams Zang-Atyok & 198901 \\
+			\hline
+			AFOLAYAN Opeyemi Precious & 207243 \\
+			\hline
+			AGBO Edwin Okojokwu  & 207244 \\
+			\hline
+			AJAYI Daniel Adedeji & 207246 \\
+			\hline
+			AKINBO Babatunde Olufisayo & 207247 \\
+			\hline
+			ALABI Godwin Olanipekun & 207248 \\
+			\hline
+			ALADE Oluwadurotimi Sunday & 207249 \\
+			\hline
+			ANWARA Ezraenuyah Ibe-Junior & 207250 \\
+			\hline
+			AREMU Oluwatosin Eunice & 207251 \\
+			\hline
+			BABATUNDE Oluwatofunmi Ezekiel & 207253 \\
+			\hline
+			BADA Tomiwa Ayodeji & 207254 \\
+			\hline
+			EKPO David Friday & 207255 \\
+			\hline
+			FAWOLE Abdulrasheed Bolaji & 207256 \\
+			\hline
+			KAZEEM Khadijat Omowunmi & 207257 \\
+			\hline
+			OBADEYI Oluwaseyi Folahan & 207258 \\
+			\hline
+			ODIKPO George & 207259 \\
+			\hline
+			ODUNUGA Paul Imisiola & 207260 \\
+			\hline
+			OGUNLEKE Abisola Deborah & 207261 \\
+			\hline
+			OLAJIDE Samuel Afolabi & 207262 \\
+			\hline
+			OLUWADELE Stephen Oyekunle & 207264 \\
+			\hline
+		\end{tabular}
+	\caption{Names and Matriculation Numbers of Group members}
+	\end{table}
+\label{sec:1}
+
+% section  (end)
+
+	\section{Problem and Solution} 
+\label{sec:2}
+	\begin{ques}
+	The function defined as 
+	\[
+	f(x) = x + 2L \quad \text{for $0 \le x < L$}
+\]
+	define and sketch the odd periodic extension of $f(x)$ and the even periodic extension of $f(x)$. Find 
+	\begin{itemize}
+	\item[(a)] The Fourier sine series and;
+	\item[(b)] The Fourier cosine series.
+\end{itemize}
+\end{ques}
+%%% WTH!!! This shit is getting real
+\begin{soln}
+	Given 
+	\[
+	f(x) = x + 2L \quad \text{for $0 \le x < L$}
+\] 
+For the odd periodic extension of $f(x)$ we have,
+
+\begin{equation*}
+	F(x) = \begin{cases}
+	f(x) = x + 2L, & 0 \le x < L \\
+	-f(-x) = x - 2L, & -L < x < 0
+\end{cases}
+\end{equation*}
+and $F(x) = F(x+ 2L)$. \\
+The sketch of the curve is given in the figure below\\
+
+\begin{figure}[H]
+	\centering
+	\begin{asy}
+	import graph; size(15cm); 
+real labelscalefactor = 0.5; /* changes label-to-point distance */
+pen dps = linewidth(0.7) + fontsize(10); defaultpen(dps); /* default pen style */ 
+pen dotstyle = black; /* point style */ 
+real xmin = -3.9, xmax = 3.9, ymin = -3.9015034041207897, ymax = 3.990578165431899;  /* image dimensions */
+pen ttttff = rgb(0.2,0.2,1); pen ffwwzz = rgb(1,0.4,0.6); 
+Label laxis; laxis.p = fontsize(10); 
+string blank(real x) {return "";} 
+xaxis(xmin, xmax, Ticks(laxis, blank, Step = 1, Size = 2, NoZero),EndArrow(6), above = true); 
+yaxis(ymin, ymax, Ticks(laxis, blank, Step = 1, Size = 2, NoZero),EndArrow(6), above = true); /* draws axes; NoZero hides '0' label */ 
+ /* draw figures */
+draw((0,2)--(1,3), linewidth(2) + ttttff); 
+draw((2,2)--(3,3), linewidth(2) + ttttff); 
+draw((-1,-3)--(0,-2), linewidth(2) + ttttff); 
+draw((-2,2)--(-1,3), linewidth(2) + ttttff); 
+draw((-3,-3)--(-2,-2), linewidth(2) + ttttff); 
+draw((1,ymin)--(1,ymax), linewidth(2) + dotted + ffwwzz); /* line */
+draw((2,ymin)--(2,ymax), linewidth(2) + dotted + ffwwzz); /* line */
+draw((-1,ymin)--(-1,ymax), linewidth(2) + dotted + ffwwzz); /* line */
+draw((-2,ymin)--(-2,ymax), linewidth(2) + dotted + ffwwzz); /* line */
+label("$L$",(1.0364157223178836,-0.1615027081294244),SE*labelscalefactor); 
+label("$2L$",(2.033699040779301,-0.1615027081294244),SE*labelscalefactor); 
+label("$3L$",(3.0309823592407192,-0.1615027081294244),SE*labelscalefactor); 
+label("$-L$",(-0.9581509146049519,-0.1615027081294244),SE*labelscalefactor); 
+label("$-2L$",(-1.9677463728004612,-0.1615027081294244),SE*labelscalefactor); 
+label("$-3L$",(-2.9650296912618788,-0.1615027081294244),SE*labelscalefactor); 
+label("$L$",(0.03913240385646586,1.1587860265908405),SE*labelscalefactor); 
+label("$2L$",(0.03913240385646586,2.156069345052257),SE*labelscalefactor); 
+label("$3L$",(0.03913240385646586,3.165664803247765),SE*labelscalefactor); 
+label("$-L$",(0.03913240385646586,-0.8357806103319918),SE*labelscalefactor); 
+label("$-2L$",(0.03913240385646586,-1.8453760685274996),SE*labelscalefactor); 
+label("$-3L$",(0.03913240385646586,-2.842659386988916),SE*labelscalefactor); 
+ /* dots and labels */
+clip((xmin,ymin)--(xmin,ymax)--(xmax,ymax)--(xmax,ymin)--cycle); 
+ /* end of picture */
+\end{asy}
+\caption{The sketch of the odd extension of $f(x)$}
+\end{figure}
+
+Similarly for the even periodic extension of $f(x)$ we have the following function,
+\begin{equation*}
+	G(x) = \begin{cases}
+	f(x) = x + 2L, & 0 \le x < L \\
+	f(-x) = -x + 2L, & -L < x < 0
+\end{cases}
+\end{equation*}
+and $G(x) = G(x + 2L)$ \\
+The sketch is given in the figure below
+\begin{figure}[H]
+	\centering
+	\begin{asy}
+		 /* Geogebra to Asymptote conversion, documentation at artofproblemsolving.com/Wiki go to User:Azjps/geogebra */
+		import graph; size(15cm); 
+		real labelscalefactor = 0.5; /* changes label-to-point distance */
+		pen dps = linewidth(0.7) + fontsize(10); defaultpen(dps); /* default pen style */ 
+		pen dotstyle = cyan; /* point style */ 
+		real xmin = -3.9, xmax = 3.9, ymin = -1.7868630473068574, ymax = 3.9;  /* image dimensions */
+		pen ttffqq = rgb(0.2,1,0); 
+		Label laxis; laxis.p = fontsize(10); 
+		string blank(real x) {return "";} 
+		xaxis(xmin, xmax, Ticks(laxis, blank, Step = 1, Size = 2, NoZero),EndArrow(6), above = true); 
+		yaxis(ymin, ymax, Ticks(laxis, blank, Step = 1, Size = 2, NoZero),EndArrow(6), above = true); /* draws axes; NoZero hides '0' label */ 
+		/* draw figures */
+		draw((0,2)--(1,3), linewidth(2) + ttffqq); 
+		draw((1,3)--(2,2), linewidth(2) + ttffqq); 
+		draw((2,2)--(3,3), linewidth(2) + ttffqq); 
+		draw((0,2)--(-1,3), linewidth(2) + ttffqq); 
+		draw((-1,3)--(-2,2), linewidth(2) + ttffqq); 
+		label("$L$",(0.027978487292595052,1.1374756822971672),SE*labelscalefactor); 
+		label("$2L$",(0.027978487292595052,2.1451129973667187),SE*labelscalefactor); 
+		label("$3L$",(0.027978487292595052,3.1417977329246445),SE*labelscalefactor); 
+		label("$L$",(1.0356158023621478,-0.1407909467392412),SE*labelscalefactor); 
+		label("$2L$",(2.032300537920075,-0.1407909467392412),SE*labelscalefactor); 
+		label("$3L$",(3.0289852734780025,-0.1407909467392412),SE*labelscalefactor); 
+		label("$-L$",(-0.9687062482653321,-0.1407909467392412),SE*labelscalefactor); 
+		label("$-2L$",(-1.9653909838232595,-0.1407909467392412),SE*labelscalefactor); 
+		label("$-3L$",(-2.9620757193811866,-0.1407909467392412),SE*labelscalefactor); 
+		label("$-L$",(0.027978487292595052,-0.8558937888186848),SE*labelscalefactor); 
+		label("$-2L$",(0.027978487292595052,-1.8525785243766109),SE*labelscalefactor); 
+		label("$-3L$",(0.027978487292595052,-2.860215839446162),SE*labelscalefactor); 
+		/* dots and labels */
+		dot((-1,3),linewidth(4pt) + dotstyle); 
+		dot((1,3),linewidth(4pt) + dotstyle); 
+		dot((2,2),dotstyle); 
+		dot((0,2),linewidth(4pt) + dotstyle); 
+		dot((-2,2),dotstyle); 
+		dot((3,3),dotstyle); 
+		clip((xmin,ymin)--(xmin,ymax)--(xmax,ymax)--(xmax,ymin)--cycle); 
+		/* end of picture */
+	\end{asy}
+	\caption{The sketch of the even extension of $f(x)$}
+\end{figure}
+
+\begin{enumerate}
+	\item[(a)] The Fourier series for $F(x)$ is the Fourier sine series which is of the form 
+	\[
+	F(x) = \sum_{n=1}^{\infty} b_n \sin \frac{n\pi x}{L} 
+\]
+where $\disp b_n = \frac2L \int_{0}^{L} f(x) \sin \frac{n\pi x}{L}\, dx$
+
+\begin{align*}
+	b_n & = \frac2L \int_{0}^{L} f(x) \sin \frac{n\pi x}{L}\, dx \\
+		& = \frac2L \int_{0}^{L} (x + 2L) \sin \frac{n\pi x}{L}\, dx \\
+		& = \frac2L \int_{0}^{L} x \sin \frac{n\pi x}{L} + 2L \sin \frac{n\pi x}{L} \, dx \\
+		& = \frac2L \left[ \frac{-L}{n\pi}x\cos \frac{n\pi x}{L} + \frac{L^2}{n^2\pi^2}\sin \frac{n\pi x}{L} - \frac{2L^2}{n\pi} \cos \frac{n\pi x}{L} \right]_{0}^{L} \\
+		& = \frac2L \left\{ \left[ \frac{-L^2}{n\pi}\cos (n\pi) + \frac{L^2}{n^2\pi^2}\sin (n\pi) - \frac{2L^2}{n\pi} \cos (n\pi) \right] - \left[ 0 + 0 - \frac{2L^2}{n \pi} \right] \right\} 
+\end{align*}
+
+\begin{align*}
+		b_n & = 2 \left[ \frac{-L}{n\pi}\cos (n\pi) - \frac{2L}{n\pi} \cos (n\pi) + \frac{2L}{n \pi} \right] \\
+		& = - 2 \left[ \frac{3L}{n\pi} \cos (n\pi) - \frac{2L}{n \pi} \right] \\
+		& = - 2L \left[ \frac{(-1)^n \cdot 3 - 2}{n\pi} \right] \\
+		& = \begin{cases}
+				\frac{10L}{n\pi} & \text{if $n$ is even} \\[1\baselineskip]
+				\frac{-2L}{n\pi} & \text{if $n$ is odd} 
+\end{cases}
+\end{align*}
+$\disp \therefore b_n = \begin{cases}
+				\frac{10L}{n\pi} & \text{if $n$ is even} \\[1\baselineskip]
+				\frac{-2L}{n\pi} & \text{if $n$ is odd} 
+\end{cases} $ \\
+Hence the Fourier sine series is given as 
+	\[
+	\frac{10L}{\pi}\sum_{n = 1}^{\infty} \frac{1}{2n -1} \sin \frac{(2n-1)\pi x}{L} - \frac{2L}{\pi}\sum_{n = 1}^{\infty} \frac{1}{2n} \sin \frac{2\pi nx}{L} 
+\]
+
+\begin{mdframed}[style=mybox]
+	\[
+	F(x) = \frac{10L}{\pi}\sum_{n = 1}^{\infty} \frac{1}{2n -1} \sin \frac{(2n-1)\pi x}{L} - \frac{2L}{\pi}\sum_{n = 1}^{\infty} \frac{1}{2n} \sin \frac{2\pi nx}{L} 
+\] 
+\end{mdframed}
+
+ \item[(b)] The Fourier series for $G(x)$ is the  cosine series which is of the form 
+	\[
+	G(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos \frac{n\pi x}{L} 
+\]
+where $\disp a_0 = \frac{2}{L} \int_{0}^{L} f(x) \, dx$ and $\disp a_n = \frac2L \int_{0}^{L} f(x) \cos \frac{n\pi x}{L}\, dx$ \\
+\begin{align*}
+	a_0 & = \frac{2}{L} \int_{0}^{L} f(x) \, dx \\
+		& = \frac{2}{L} \int_{0}^{L} (x + 2L) \, dx \\
+		& = \frac2L \left[ \frac{x^2}{2} + 2Lx \right]_{0}^{L} \\
+		& = \frac2L \left[ \frac{L^2}{2} + 2L^2 - 0 \right] \\
+		& = 5L
+\end{align*}
+$\therefore \disp a_0 = 5L$
+
+\begin{align*}
+	a_n & = \frac2L \int_{0}^{L} f(x) \cos \frac{n\pi x}{L}\, dx \\
+		& = \frac2L \int_{0}^{L} (x + 2L) \cos \frac{n\pi x}{L}\, dx \\
+		& = \frac2L \int_{0}^{L} x \cos \frac{n\pi x}{L} + 2L \cos \frac{n\pi x}{L} \, dx \\
+		& = \frac2L \left[ \frac{L}{n\pi}x\sin \frac{n\pi x}{L} + \frac{L^2}{n^2\pi^2}\cos \frac{n\pi x}{L} - \frac{2L^2}{n\pi} \sin \frac{n\pi x}{L} \right]_{0}^{L} \\
+		& = \frac2L \left\{ \left[ \frac{L^2}{n\pi}\sin (n\pi) + \frac{L^2}{n^2\pi^2}\cos (n\pi) - \frac{2L^2}{n\pi} \sin (n\pi) \right] - \left[ 0 + \frac{L^2}{n^2 \pi^2} - 0 \right] \right\} \\
+		& = \frac2L \cdot \left( \frac{L^2}{n^2\pi^2} (\cos(n\pi) - 1) \right) \\
+		& = 2 \left( \frac{L}{n^2\pi^2} ((-1)^n - 1) \right) \\
+		& = \begin{cases}
+				0 & \text{if $n = 2k$ for $k \in \ZZ^+$ } \\
+				\frac{-4L}{(2k - 1)^2} & \text{if $n = 2k -1 $ for $k \in \ZZ^+$}
+\end{cases}
+\end{align*}
+$\disp \therefore a_n = \begin{cases}
+				0 & \text{if $n = 2k$ for $k \in \ZZ^+$ } \\
+				\frac{-4L}{(2k - 1)^2} & \text{if $n = 2k -1 $ for $k \in \ZZ^+$} 
+\end{cases}$ \\
+Hence, the Fourier cosine series is 
+\begin{mdframed}[style=mybox]
+	\[
+	G(x) = \frac{5L}{2} - \frac{4L}{\pi^2} \sum_{n = 1}^{\infty} \frac{1}{(2n-1)^2} \cos \frac{(2n - 1)\pi x}{L}
+\]
+\end{mdframed}
+\end{enumerate}
+\end{soln}
+
+\begin{ques}
+	Find the Fourier transform of 
+	\[
+	f(x) = \begin{cases}
+				1 - x^2, & |x| < 1 \\
+				0, & |x| > 1
+\end{cases}
+\]
+and evaluate 
+\[
+	\int_{0}^{\infty} \left( \frac{x\cos x - \sin x}{x^3} \right) \cos \frac{x}{2} \, dx
+\]
+\end{ques}
+
+\begin{soln}
+	The Fourier transform of a given function $f(x)$ is given by
+	\[
+	\mathcal{F}\{ f(x) \} = F(\alpha) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(x) e^{i\alpha x} \, dx
+\]
+Now 
+
+\begin{align*}
+	F(\alpha) & = \frac{1}{\sqrt{2\pi}} \int_{-1}^{1} (1 - x^2) e^{i\alpha x} \, dx \\
+			  & = \frac{1}{\sqrt{2\pi}} \int_{-1}^{1} (1 - x^2) (\cos \alpha x + i\sin \alpha x) \, dx \\
+			  & = \frac{1}{\sqrt{2\pi}} \int_{-1}^{1} (\cos \alpha x - x^2 \cos \alpha x + i(\sin \alpha x - x^2 \sin \alpha x)) \, dx \\
+			  & = \frac{1}{\sqrt{2\pi}} \int_{-1}^{1} (\cos \alpha x - x^2 \cos \alpha x) \, dx + i \frac{1}{\sqrt{2\pi}} \int_{-1}^{1}(\sin \alpha x - x^2 \sin \alpha x) \, dx
+\end{align*}
+Note that the integral of the imaginary of the expression above is
+\[
+	\int_{-1}^{1}(\sin \alpha x - x^2 \sin \alpha x) \, dx = 0
+\]
+since the integrand is an odd function.\\
+While in the real part the integrand is an even function then we have,
+\begin{align*}
+	\int_{-1}^{1} (\cos \alpha x - x^2 \cos \alpha x) \, dx & = 2\int_{0}^{1} (\cos \alpha x - x^2 \cos \alpha x) \, dx \\
+															& = 2\left[ \frac{\sin \alpha x}{\alpha} - \frac{x\sin \alpha x}{\alpha} - \frac{2x\cos \alpha x}{\alpha^2} + \frac{2\sin \alpha x}{\alpha^3} \right]_{0}^{1} \\
+															& = 2\left[ \frac{\sin \alpha }{\alpha} - \frac{\sin \alpha }{\alpha} - \frac{2\cos \alpha }{\alpha^2} + \frac{2\sin \alpha }{\alpha^3} \right] \\
+															& = -4 \left[ \frac{\alpha \cos \alpha - \sin \alpha}{\alpha^3} \right]
+\end{align*}
+$\implies $
+	\begin{align*}
+	F(\alpha) & = \frac{1}{\sqrt{2\pi}} \int_{-1}^{1} (\cos \alpha x - x^2 \cos \alpha x) \, dx + i \frac{1}{\sqrt{2\pi}} \int_{-1}^{1}(\sin \alpha x - x^2 \sin \alpha x) \, dx \\
+			  & = \frac{-4}{\sqrt{2\pi}} \left[ \frac{\alpha \cos \alpha - \sin \alpha}{\alpha^3} \right] + i\frac{1}{\sqrt{2\pi}} (0) \\
+			  & = \frac{-4}{\sqrt{2\pi}}  \left[ \frac{\alpha \cos \alpha - \sin \alpha}{\alpha^3} \right]
+\end{align*}
+
+\begin{mdframed}[style=mybox]
+	\[
+	F(\alpha) = \frac{-4}{\sqrt{2\pi}}  \left[ \frac{\alpha \cos \alpha - \sin \alpha}{\alpha^3} \right]
+\]
+for $\alpha \neq 0$
+\end{mdframed}
+
+If $\alpha = 0$, then
+\begin{align*}
+	F(0) & = \frac{1}{\sqrt{2\pi}} \int_{-1}^{1} (1 - x^2) \, dx \\
+		 & = \frac{1}{\sqrt{2\pi}}  \frac{2}{\sqrt{2\pi}} \int_{0}^{1} (1 - x^2) \, dx \\
+		 & = \frac{2}{\sqrt{2\pi}} \left[ x - \frac{x^3}{3} \right]_{0}^{1} = \frac{2}{\sqrt{2\pi}} \left[ \left( 1 - \frac{1}{3} \right) - 0 \right] \\
+		 & = \frac{4}{3\sqrt{2\pi}}
+\end{align*}
+
+\begin{mdframed}[style=observebox]
+	We observe that $F(\alpha)$ is an even function since
+	\begin{align*}
+	F(-\alpha) & = \frac{-4}{\sqrt{2\pi}}  \left[ \frac{-\alpha \cos(-\alpha) - \sin (-\alpha)}{(-\alpha)^3} \right] \\
+			   & = \frac{-4}{\sqrt{2\pi}}  \left[ \frac{-\alpha \cos \alpha + \sin \alpha}{-\alpha^3} \right] \\
+			   & = \frac{-4}{\sqrt{2\pi}}  \left[ \frac{\alpha \cos \alpha - \sin \alpha}{\alpha^3} \right] \\
+			   & = F(\alpha)
+\end{align*}
+\end{mdframed}
+
+
+\begin{mdframed}[style=recallbox]
+	Recall from the Fourier Integral theorem that if:
+	\[
+	F(\alpha) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(x) e^{i\alpha x} \, dx
+\]
+then 
+\[
+	f(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} F(\alpha) e^{-i\alpha x} \, d\alpha
+\]
+\end{mdframed}
+Thus, we have 
+\begin{align*}
+	f(x) & = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} F(\alpha) (\cos \alpha x + i\sin \alpha x) \, d\alpha \\
+		 & = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} F(\alpha) \cos \alpha x \, d\alpha - i \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} F(\alpha) \sin \alpha x \, d\alpha
+\end{align*}
+
+\begin{mdframed}[style=observebox]
+	Observe that since $F(\alpha)$ is an even function then we have that $F(\alpha)\cos \alpha x$ and $F(\alpha)\sin \alpha x$ are even and odd functions respectively. Thus we have,
+	\[
+	\int_{-\infty}^{\infty} F(\alpha) \cos \alpha x \, d\alpha = 2\int_{0}^{\infty} F(\alpha) \cos \alpha x \, d\alpha
+\]
+and 
+\[
+	\int_{-\infty}^{\infty} F(\alpha) \sin \alpha x \, d\alpha = 0
+\]
+\end{mdframed}
+Then 
+\begin{align*}
+	f(x) & = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} F(\alpha) \cos \alpha x \, d\alpha - i \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} F(\alpha) \sin \alpha x \, d\alpha \\
+		 & = \frac{2}{\sqrt{2\pi}} \int_{0}^{\infty} F(\alpha) \cos \alpha x \, d\alpha - i \frac{1}{\sqrt{2\pi}} (0) \\
+		 & = \frac{2}{\sqrt{2\pi}} \int_{0}^{\infty} F(\alpha) \cos \alpha x \, d\alpha \\
+		 & = \frac{2}{\sqrt{2\pi}} \int_{0}^{\infty} \frac{-4}{\sqrt{2\pi}}  \left[ \frac{\alpha \cos \alpha - \sin \alpha}{\alpha^3} \right] \cos \alpha x \, d\alpha \\
+		 & = \frac{-4}{\pi} \int_{0}^{\infty} \left( \frac{\alpha \cos \alpha - \sin \alpha}{\alpha^3} \right) \cos \alpha x \, d\alpha
+\end{align*}
+Hence we have 
+\begin{align*}
+	f(x) & = \frac{-4}{\pi} \int_{0}^{\infty} \left( \frac{\alpha \cos \alpha - \sin \alpha}{\alpha^3} \right) \cos \alpha x \, d\alpha \\
+		 & = \begin{cases}
+																1-x^2, & |x| < 1 \\
+																\frac{1-x^2}{2}, & |x|=1 \\
+																0, & |x| > 1
+\end{cases} \qquad \quad (\text{Since $x = 1,-1$ are points of discontinuity.})
+\end{align*}
+Next we set $x = \frac12$, then since $|x| = \frac12 < 1$, we have 
+
+\begin{align*}
+	\frac{-4}{\pi} \int_{0}^{\infty} \left( \frac{\alpha \cos \alpha - \sin \alpha}{\alpha^3} \right) \cos \frac{\alpha}{2} \, d\alpha  & = 1 - \left(\frac{1}{2}\right)^2 = 1 - \frac14 \\
+ 													& = \frac34
+\end{align*}
+$\implies$ 
+\[
+	\int_{0}^{\infty} \left( \frac{\alpha \cos \alpha - \sin \alpha}{\alpha^3} \right) \cos \frac{\alpha}{2} \, d\alpha = \frac{-3\pi}{16}
+\]
+
+Therefore,
+\begin{mdframed}[style=mybox]
+	\[
+	\int_{0}^{\infty} \left( \frac{x \cos x - \sin x}{x^3} \right) \cos \frac{x}{2} \, dx = \frac{-3\pi}{16}
+\]
+\end{mdframed}
+
+\end{soln}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% section  (end)
+\end{document}
